@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>autoimage</id>
+    <version>1.0</version>
+    <name>Auto Image</name>
+    <description>Smart images resizing and cropping</description>
+    <priority>120000</priority>
+    <position>0</position>
+    <status>active</status>
+    <has_icon>Y</has_icon>
+    <default_language>en</default_language>
+    <settings>
+        <sections>
+            <section id="general">
+                <items>
+                    <item id="some_prop">
+                        <name>Enter any text</name>
+                        <type>input</type>
+                        <default_value>Hello World!</default_value>
+                    </item>
+                    <item id="some_dropdown">
+                        <name>Pick a value from the list</name>
+                        <type>selectbox</type>
+                        <default_value>blue</default_value>
+                        <variants>
+                            <item id="red">
+                                <name>Red</name>
+                            </item>
+                            <item id="green">
+                                <name>Green</name>
+                            </item>
+                            <item id="blue">
+                                <name>Blue</name>
+                            </item>
+                        </variants>
+                    </item>
+                </items>
+            </section>
+        </sections>
+    </settings>
+</addon>
