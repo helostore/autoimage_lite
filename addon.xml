@@ -9,33 +9,7 @@
     <status>active</status>
     <has_icon>Y</has_icon>
     <default_language>en</default_language>
-    <settings>
-        <sections>
-            <section id="general">
-                <items>
-                    <item id="some_prop">
-                        <name>Enter any text</name>
-                        <type>input</type>
-                        <default_value>Hello World!</default_value>
-                    </item>
-                    <item id="some_dropdown">
-                        <name>Pick a value from the list</name>
-                        <type>selectbox</type>
-                        <default_value>blue</default_value>
-                        <variants>
-                            <item id="red">
-                                <name>Red</name>
-                            </item>
-                            <item id="green">
-                                <name>Green</name>
-                            </item>
-                            <item id="blue">
-                                <name>Blue</name>
-                            </item>
-                        </variants>
-                    </item>
-                </items>
-            </section>
-        </sections>
-    </settings>
+    <language_variables>
+        <item lang="en" id="auto_image_hint_clear_thumbnails">It's recommended to clear up the thumbnails cache by <a href="storage.clear_thumbnails" target="_blank">clicking here</a>, so the new thumbnails can be regenerated.</item>
+    </language_variables>
 </addon>

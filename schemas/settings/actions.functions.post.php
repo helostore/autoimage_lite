@@ -12,9 +12,11 @@
 * "copyright.txt" FILE PROVIDED WITH THIS DISTRIBUTION PACKAGE.            *
 ****************************************************************************/
 
-if (!defined('BOOTSTRAP')) { die('Access denied'); }
+function fn_settings_actions_addons_autoimage($newStatus, $oldStatus, $onInstall)
+{
+    if ($newStatus == 'A') {
+        fn_set_notification('N', __('notice'), __('auto_image_hint_clear_thumbnails'));
+    }
 
-fn_register_hooks(
-    'generate_thumbnail_post',
-    'generate_thumbnail_file_pre'
-);
+    return true;
+}
