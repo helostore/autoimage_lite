@@ -12,6 +12,9 @@
 * "copyright.txt" FILE PROVIDED WITH THIS DISTRIBUTION PACKAGE.            *
 ****************************************************************************/
 
-use Tygh\Registry;
-
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
+
+fn_register_hooks(
+    'generate_thumbnail_post',
+    'generate_thumbnail_file_pre'
+);
