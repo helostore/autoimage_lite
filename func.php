@@ -76,6 +76,23 @@ function fn_autoimage_generate_thumbnail_post(&$th_filename, $_lazy)
 function fn_autoimage_generate_thumbnail_file_pre(&$image_path, &$lazy, $filename, $width, $height)
 {
     $lazy = func_get_args();
-
     $image_path = '';
+}
+
+
+function fn_autoimage_hint($status)
+{
+    $status = strtolower($status);
+    $titleKey = 'auto_image_hint_title_' . $status;
+    $messageKey = 'auto_image_hint_message_' . $status;
+
+    $redirectUrl = urldecode('addons.manage');
+    $message = __($messageKey);
+    $message = str_replace('[link]', fn_url('storage.clear_thumbnails?redirect_url=' . $redirectUrl), $message);
+    fn_set_notification('N', __($titleKey), $message, 'K');
+}
+
+function fn_autoimage_uninstall()
+{
+    fn_autoimage_hint('D');
 }

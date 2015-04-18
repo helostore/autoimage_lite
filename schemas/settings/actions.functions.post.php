@@ -12,10 +12,10 @@
 * "copyright.txt" FILE PROVIDED WITH THIS DISTRIBUTION PACKAGE.            *
 ****************************************************************************/
 
-function fn_settings_actions_addons_autoimage($newStatus, $oldStatus, $onInstall)
+function fn_settings_actions_addons_autoimage($newStatus = null, $oldStatus = null, $onInstall = null)
 {
-    if ($newStatus == 'A') {
-        fn_set_notification('N', __('notice'), __('auto_image_hint_clear_thumbnails'));
+    if (in_array($newStatus, array('A', 'D'))) {
+        fn_autoimage_hint($newStatus);
     }
 
     return true;

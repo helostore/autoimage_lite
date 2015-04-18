@@ -10,6 +10,12 @@
     <has_icon>Y</has_icon>
     <default_language>en</default_language>
     <language_variables>
-        <item lang="en" id="auto_image_hint_clear_thumbnails">It's recommended to clear up the thumbnails cache by <a href="storage.clear_thumbnails" target="_blank">clicking here</a>, so the new thumbnails can be regenerated.</item>
+        <item lang="en" id="auto_image_hint_title_a">Why, hello there!</item>
+        <item lang="en" id="auto_image_hint_message_a"><![CDATA[<span style="font-size: 170%;"> &#9786; </span> Now that you activated <b>Auto Image</b>, it's recommended to clear up the thumbnails cache by <a href="[link]">clicking here</a>, so that the shinny new thumbnails can be regenerated.]]></item>
+        <item lang="en" id="auto_image_hint_title_d">I'm gonna go now. Buh bye..</item>
+        <item lang="en" id="auto_image_hint_message_d"><![CDATA[<span style="font-size: 170%;"> &#9785; </span> But before that, you should <a href="[link]">click here</a> to regenerate back the default CS-Cart's thumbnails.]]></item>
     </language_variables>
+    <functions>
+        <item for="uninstall">fn_autoimage_uninstall</item>
+    </functions>
 </addon>
