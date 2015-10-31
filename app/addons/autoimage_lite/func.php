@@ -97,10 +97,13 @@ function fn_autoimage_lite_hint($status)
     fn_set_notification('N', __($titleKey), $message, 'K');
 }
 
-/**
- *
- */
+
 function fn_autoimage_lite_uninstall()
 {
 	fn_autoimage_lite_hint('D');
+}
+
+function fn_autoimage_lite_install()
+{
+
 }

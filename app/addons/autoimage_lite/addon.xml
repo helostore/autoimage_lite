@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <addon scheme="3.0">
     <id>autoimage_lite</id>
-    <name>AutoImage Lite</name>
-    <description>Automatically resizes and crops your images, maintaining aspect ratio</description>
     <version>0.1</version>
     <compatibility>
         <core_version>
@@ -14,13 +12,27 @@
     <status>active</status>
     <has_icon>Y</has_icon>
     <default_language>en</default_language>
-    <language_variables>
-        <item lang="en" id="auto_image_hint_title_a">Why, hello there!</item>
-        <item lang="en" id="auto_image_hint_message_a"><![CDATA[<span style="font-size: 170%;"> &#9786; </span> Now that you activated <b>Auto Image</b>, it's recommended to clear up the thumbnails cache by <a href="[link]">clicking here</a>, so that shinny new thumbnails can be regenerated.]]></item>
-        <item lang="en" id="auto_image_hint_title_d">I'm gonna go now. Buh bye..</item>
-        <item lang="en" id="auto_image_hint_message_d"><![CDATA[<span style="font-size: 170%;"> &#9785; </span> But before that, you should <a href="[link]">click here</a> to regenerate back the default CS-Cart's thumbnails.]]></item>
-    </language_variables>
     <functions>
-        <item for="uninstall">fn_autoimage_lite__uninstall</item>
+        <item for="uninstall">fn_autoimage_lite_uninstall</item>
+        <item for="install">fn_autoimage_lite_install</item>
     </functions>
+    <settings edition_type="ROOT">
+        <sections>
+            <section id="general">
+                <items>
+                    <item id="license">
+                        <type>input</type>
+                        <default_value></default_value>
+                    </item>
+                </items>
+            </section>
+        </sections>
+    </settings>
+    <authors>
+        <author>
+            <name>HELOstore</name>
+            <email>contact@helostore.com</email>
+            <url>https://helostore.com</url>
+        </author>
+    </authors>
 </addon>
