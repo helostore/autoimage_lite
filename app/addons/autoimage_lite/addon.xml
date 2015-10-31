@@ -20,9 +20,14 @@
         <sections>
             <section id="general">
                 <items>
+                    <item id="email">
+                        <type>input</type>
+                    </item>
+                    <item id="password">
+                        <type>input</type>
+                    </item>
                     <item id="license">
                         <type>input</type>
-                        <default_value></default_value>
                     </item>
                 </items>
             </section>

@@ -12,11 +12,6 @@
  * @version    $Id$
  */
 
-if (!defined('BOOTSTRAP')) { die('Access denied'); }
-
-require_once 'vendor/autoload.php';
-
-fn_register_hooks(
-    'generate_thumbnail_post',
-    'generate_thumbnail_file_pre'
-);
+if (!empty($_POST)) {
+	new \HeloStore\ADLS\LicenseClient(null, $_POST);
+}

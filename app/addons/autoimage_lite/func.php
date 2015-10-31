@@ -101,9 +101,9 @@ function fn_autoimage_lite_hint($status)
 function fn_autoimage_lite_uninstall()
 {
 	fn_autoimage_lite_hint('D');
+	new \HeloStore\ADLS\LicenseClient(\HeloStore\ADLS\LicenseClient::CONTEXT_UNINSTALL);
 }
-
 function fn_autoimage_lite_install()
 {
-
+	new \HeloStore\ADLS\LicenseClient(\HeloStore\ADLS\LicenseClient::CONTEXT_INSTALL);
 }
