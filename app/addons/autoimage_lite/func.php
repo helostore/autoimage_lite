@@ -1,16 +1,16 @@
 <?php
-/***************************************************************************
-*                                                                          *
-*   (c) 2004 Vladimir V. Kalynyak, Alexey V. Vinokurov, Ilya M. Shalnev    *
-*                                                                          *
-* This  is  commercial  software,  only  users  who have purchased a valid *
-* license  and  accept  to the terms of the  License Agreement can install *
-* and use this program.                                                    *
-*                                                                          *
-****************************************************************************
-* PLEASE READ THE FULL TEXT  OF THE SOFTWARE  LICENSE   AGREEMENT  IN  THE *
-* "copyright.txt" FILE PROVIDED WITH THIS DISTRIBUTION PACKAGE.            *
-****************************************************************************/
+/**
+ * AutoImage
+ *
+ * This source file is part of a commercial software. Only users who have purchased a valid license through
+ * https://helostore.com/ and accepted to the terms of the License Agreement can install this product.
+ *
+ * @category   Zend
+ * @package    Zend_Application
+ * @copyright  Copyright (c) 2015-2016 HELOstore. (https://helostore.com/)
+ * @license    https://helostore.com/legal/license-agreement/     License Agreement
+ * @version    $Id$
+ */
 
 use Tygh\Registry;
 use Tygh\Storage;
@@ -23,7 +23,7 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
  *
  * @throws \Tygh\Exceptions\DeveloperException
  */
-function fn_autoimage_generate_thumbnail_post(&$th_filename, $_lazy)
+function fn_autoimage_lite_generate_thumbnail_post(&$th_filename, $_lazy)
 {
     if (!is_array($_lazy) || defined('NO_AUTOIMAGE')) {
         return;
@@ -36,7 +36,7 @@ function fn_autoimage_generate_thumbnail_post(&$th_filename, $_lazy)
     if (!empty($tmp_path)) {
 
 
-        require_once AUTOIMAGE_ADDON_DIR . '/vendor/WideImage/WideImage.php';
+        require_once AUTOIMAGE_LITE_ADDON_DIR . '/vendor/WideImage/WideImage.php';
         $im = WideImage::load($tmp_path);
         /** @var WideImage_Image $im */
         $im = $im->resize($width, $height, 'outside')->crop('center', 'center', $width, $height);
@@ -73,14 +73,19 @@ function fn_autoimage_generate_thumbnail_post(&$th_filename, $_lazy)
  * @param $width
  * @param $height
  */
-function fn_autoimage_generate_thumbnail_file_pre(&$image_path, &$lazy, $filename, $width, $height)
+function fn_autoimage_lite_generate_thumbnail_file_pre(&$image_path, &$lazy, $filename, $width, $height)
 {
+	if (defined('NO_AUTOIMAGE')) {
+		return;
+	}
     $lazy = func_get_args();
     $image_path = '';
 }
 
-
-function fn_autoimage_hint($status)
+/**
+ * @param $status
+ */
+function fn_autoimage_lite_hint($status)
 {
     $status = strtolower($status);
     $titleKey = 'auto_image_hint_title_' . $status;
@@ -92,7 +97,10 @@ function fn_autoimage_hint($status)
     fn_set_notification('N', __($titleKey), $message, 'K');
 }
 
-function fn_autoimage_uninstall()
+/**
+ *
+ */
+function fn_autoimage_lite_uninstall()
 {
-    fn_autoimage_hint('D');
+	fn_autoimage_lite_hint('D');
 }
