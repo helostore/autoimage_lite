@@ -19,10 +19,17 @@
  *
  * @return bool
  */
-function fn_settings_actions_addons_autoimage_lite($newStatus = null, $oldStatus = null, $onInstall = null)
+function fn_settings_actions_addons_autoimage_lite(&$newStatus = null, $oldStatus = null, &$onInstall = null)
 {
-    if (in_array($newStatus, array('A', 'D'))) {
-	    fn_autoimage_lite_hint($newStatus);
+	if (in_array($newStatus, array('A', 'D'))) {
+		if ($newStatus == 'A') {
+			if (!\HeloStore\ADLS\LicenseClient::activate()) {
+				$newStatus = 'D';
+			}
+	    } else {
+			fn_autoimage_lite_hint($newStatus);
+			\HeloStore\ADLS\LicenseClient::deactivate();
+		}
     }
 
     return true;
