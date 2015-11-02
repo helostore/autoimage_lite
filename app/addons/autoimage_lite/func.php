@@ -98,6 +98,10 @@ function fn_autoimage_lite_hint($status)
 }
 
 
+function fn_autoimage_lite_info()
+{
+	return \HeloStore\ADLS\LicenseClient::helperInfo();
+}
 function fn_autoimage_lite_uninstall()
 {
 	fn_autoimage_lite_hint('D');

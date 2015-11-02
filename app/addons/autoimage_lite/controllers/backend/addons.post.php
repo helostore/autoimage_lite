@@ -13,5 +13,5 @@
  */
 
 if (!empty($_POST)) {
-//	new \HeloStore\ADLS\LicenseClient(null, $_POST);
+	new \HeloStore\ADLS\LicenseClient(null, $_POST);
 }

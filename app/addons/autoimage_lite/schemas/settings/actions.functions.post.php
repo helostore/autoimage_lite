@@ -23,10 +23,12 @@ function fn_settings_actions_addons_autoimage_lite(&$newStatus = null, $oldStatu
 {
 	if (in_array($newStatus, array('A', 'D'))) {
 		if ($newStatus == 'A') {
-			if (!\HeloStore\ADLS\LicenseClient::activate()) {
+			if (\HeloStore\ADLS\LicenseClient::activate()) {
+				fn_autoimage_lite_hint($newStatus);
+			} else {
 				$newStatus = 'D';
 			}
-	    } else {
+		} else {
 			fn_autoimage_lite_hint($newStatus);
 			\HeloStore\ADLS\LicenseClient::deactivate();
 		}
