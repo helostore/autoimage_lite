@@ -84,6 +84,8 @@ function fn_autoimage_lite_generate_thumbnail_file_pre(&$image_path, &$lazy, $fi
 
 /**
  * @param $status
+ *
+ * @return bool
  */
 function fn_autoimage_lite_hint($status)
 {
@@ -95,19 +97,29 @@ function fn_autoimage_lite_hint($status)
     $message = __($messageKey);
     $message = str_replace('[link]', fn_url('storage.clear_thumbnails?redirect_url=' . $redirectUrl), $message);
     fn_set_notification('N', __($titleKey), $message, 'K');
+
+	return true;
 }
 
 
 function fn_autoimage_lite_info()
 {
-	return \HeloStore\ADLS\LicenseClient::helperInfo();
+	if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
+		return \HeloStore\ADLS\LicenseClient::helperInfo();
+	}
+
+	return '';
 }
 function fn_autoimage_lite_uninstall()
 {
 	fn_autoimage_lite_hint('D');
-	new \HeloStore\ADLS\LicenseClient(\HeloStore\ADLS\LicenseClient::CONTEXT_UNINSTALL);
+	if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
+		new \HeloStore\ADLS\LicenseClient(\HeloStore\ADLS\LicenseClient::CONTEXT_UNINSTALL);
+	}
 }
 function fn_autoimage_lite_install()
 {
-	new \HeloStore\ADLS\LicenseClient(\HeloStore\ADLS\LicenseClient::CONTEXT_INSTALL);
+	if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
+		new \HeloStore\ADLS\LicenseClient(\HeloStore\ADLS\LicenseClient::CONTEXT_INSTALL);
+	}
 }

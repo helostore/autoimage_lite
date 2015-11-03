@@ -40,3 +40,7 @@ msgctxt "Languages::auto_image_hint_message_d"
 msgid "<span style=\"font-size: 170%;\"> &#9785; </span> But before that, you should <a href=\"[link]\">click here</a> to regenerate back the default CS-Cart's thumbnails."
 msgstr "<span style=\"font-size: 170%;\"> &#9785; </span> But before that, you should <a href=\"[link]\">click here</a> to regenerate back the default CS-Cart's thumbnails."
 
+msgctxt "Languages::my_sidekick_is_not_present"
+msgid "This add-on has a single requirement: Sidekick add-on. Please install and activate Sidekick first."
+msgstr "This add-on has a single requirement: Sidekick add-on. Please install and activate Sidekick first."
+

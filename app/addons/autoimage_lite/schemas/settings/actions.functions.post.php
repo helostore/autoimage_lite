@@ -20,25 +20,23 @@
  * @return bool
  */
 
-
-if (($autoLoader = dirname(__FILE__).'/../../vendor/autoload.php') && file_exists($autoLoader)) {
-	require_once $autoLoader;
-}
-
 function fn_settings_actions_addons_autoimage_lite(&$newStatus = null, $oldStatus = null, &$onInstall = null)
 {
 	if (in_array($newStatus, array('A', 'D'))) {
-
-
 		if ($newStatus == 'A') {
-			if (\HeloStore\ADLS\LicenseClient::activate()) {
-				fn_autoimage_lite_hint($newStatus);
+			if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
+				if (\HeloStore\ADLS\LicenseClient::activate()) {
+					return fn_autoimage_lite_hint($newStatus);
+				}
 			} else {
-				$newStatus = 'D';
+				fn_set_notification('W', __('warning'), __('my_sidekick_is_not_present'), 'K');
 			}
+			$newStatus = 'D';
 		} else {
 			fn_autoimage_lite_hint($newStatus);
-			\HeloStore\ADLS\LicenseClient::deactivate();
+			if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
+				\HeloStore\ADLS\LicenseClient::deactivate();
+			}
 		}
     }
 
