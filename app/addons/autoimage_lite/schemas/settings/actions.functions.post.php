@@ -19,9 +19,17 @@
  *
  * @return bool
  */
+
+
+if (($autoLoader = dirname(__FILE__).'/../../vendor/autoload.php') && file_exists($autoLoader)) {
+	require_once $autoLoader;
+}
+
 function fn_settings_actions_addons_autoimage_lite(&$newStatus = null, $oldStatus = null, &$onInstall = null)
 {
 	if (in_array($newStatus, array('A', 'D'))) {
+
+
 		if ($newStatus == 'A') {
 			if (\HeloStore\ADLS\LicenseClient::activate()) {
 				fn_autoimage_lite_hint($newStatus);

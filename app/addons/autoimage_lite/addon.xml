@@ -37,6 +37,12 @@
             </section>
         </sections>
     </settings>
+    <compatibility>
+        <dependencies>sidekick</dependencies>
+    </compatibility>
+    <core_version>
+        <min>4.0.0</min>
+    </core_version>
     <authors>
         <author>
             <name>HELOstore</name>
