@@ -2,11 +2,6 @@
 <addon scheme="3.0">
     <id>autoimage_lite</id>
     <version>0.1</version>
-    <compatibility>
-        <core_version>
-            <min>4.0</min>
-        </core_version>
-    </compatibility>
     <priority>120000</priority>
     <position>0</position>
     <status>active</status>
@@ -39,10 +34,10 @@
     </settings>
     <compatibility>
         <dependencies>sidekick</dependencies>
+        <core_version>
+            <min>4.0.0</min>
+        </core_version>
     </compatibility>
-    <core_version>
-        <min>4.0.0</min>
-    </core_version>
     <authors>
         <author>
             <name>HELOstore</name>

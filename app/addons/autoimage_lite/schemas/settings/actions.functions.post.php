@@ -12,6 +12,7 @@
  * @version    $Id$
  */
 
+
 /**
  * @param null $newStatus
  * @param null $oldStatus
@@ -19,7 +20,6 @@
  *
  * @return bool
  */
-
 function fn_settings_actions_addons_autoimage_lite(&$newStatus = null, $oldStatus = null, &$onInstall = null)
 {
 	if (in_array($newStatus, array('A', 'D'))) {
