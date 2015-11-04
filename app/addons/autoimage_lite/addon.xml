@@ -4,7 +4,7 @@
     <version>0.1</version>
     <priority>120000</priority>
     <position>0</position>
-    <status>active</status>
+    <status>disabled</status>
     <has_icon>Y</has_icon>
     <default_language>en</default_language>
     <functions>
