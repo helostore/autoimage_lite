@@ -102,10 +102,10 @@ function fn_autoimage_lite_hint($status)
 }
 
 
-function fn_autoimage_lite_info()
+function fn_autoimage_lite_info($productCode)
 {
 	if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
-		return \HeloStore\ADLS\LicenseClient::helperInfo();
+		return \HeloStore\ADLS\LicenseClient::helperInfo($productCode);
 	}
 
 	return '';
@@ -114,12 +114,12 @@ function fn_autoimage_lite_uninstall()
 {
 	fn_autoimage_lite_hint('D');
 	if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
-		new \HeloStore\ADLS\LicenseClient(\HeloStore\ADLS\LicenseClient::CONTEXT_UNINSTALL);
+		\HeloStore\ADLS\LicenseClient::process(\HeloStore\ADLS\LicenseClient::CONTEXT_UNINSTALL);
 	}
 }
 function fn_autoimage_lite_install()
 {
 	if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
-		new \HeloStore\ADLS\LicenseClient(\HeloStore\ADLS\LicenseClient::CONTEXT_INSTALL);
+		\HeloStore\ADLS\LicenseClient::process(\HeloStore\ADLS\LicenseClient::CONTEXT_INSTALL);
 	}
 }
