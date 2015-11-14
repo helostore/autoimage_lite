@@ -13,3 +13,4 @@
  */
 
 define('AUTOIMAGE_LITE_ADDON_DIR', dirname(__FILE__));
+// test
