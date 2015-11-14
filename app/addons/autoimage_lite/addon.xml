@@ -35,7 +35,6 @@
     <compatibility>
         <php_extensions>
             <gd>
-                <min>1.0.0</min>
             </gd>
         </php_extensions>
         <dependencies>sidekick</dependencies>
