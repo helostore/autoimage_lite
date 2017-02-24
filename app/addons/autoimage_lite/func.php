@@ -12,6 +12,7 @@
  * @version    $Id$
  */
 
+use HeloStore\AutoImage\ImageResizeManager;
 use Tygh\Registry;
 use Tygh\Storage;
 
@@ -29,12 +30,16 @@ function fn_autoimage_lite_generate_thumbnail_post(&$th_filename, $_lazy)
     if (!is_array($_lazy) || defined('NO_AUTOIMAGE')) {
         return;
     }
-    list($imagePath, $lazy, $filename, $width, $height) = $_lazy;
-    $imageAbsolutePath = Storage::instance('images')->getAbsolutePath($imagePath);
-    $newThumbPath = \HeloStore\AutoImage\ImageResizeManager::instance()->basic($imageAbsolutePath, $filename, $width, $height);
+    list($imagePath, $lazy, $thumbRelativeFilePath, $width, $height) = $_lazy;
+    $inputAbsoluteFilePath = Storage::instance('images')->getAbsolutePath($imagePath);
+
+    $imagesPath = Storage::instance('images')->getAbsolutePath('');
+    $outputAbsoluteFilePath = $imagesPath . $thumbRelativeFilePath;
+
+    $newThumbPath = ImageResizeManager::instance()->process($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height);
 
     if (!empty($newThumbPath)) {
-        $th_filename = $newThumbPath;
+        $th_filename = $thumbRelativeFilePath;
     }
 }
 
@@ -50,6 +55,11 @@ function fn_autoimage_lite_generate_thumbnail_file_pre(&$image_path, &$lazy, $fi
 	if (defined('NO_AUTOIMAGE')) {
 		return;
 	}
+
+    $method = ImageResizeManager::instance()->getSelectedMethod();
+    if ($method == 'default') {
+        return;
+    }
     // Trick CS-Cart into not going with the default processing; temporarily move args to $lazy variable
     $lazy = func_get_args();
     $image_path = '';
@@ -85,4 +95,18 @@ function fn_autoimage_lite_install()
 	if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
 		\HeloStore\ADLS\LicenseClient::process(\HeloStore\ADLS\LicenseClient::CONTEXT_INSTALL);
 	}
+}
+
+function fn_autoimage_lite_preview()
+{
+    $url = fn_url('autoimage_lite.test');
+
+    return '<div class="control-group setting-wide autoimage_lite "><label class="control-label "></label>
+        <div class="controls">' . __('autoimage_lite.settings.preview', array('[url]' => $url)) . '</div></div>';
+}
+function fn_settings_actions_addons_autoimage_lite_method($newValue, $oldValue)
+{
+    if ($newValue != $oldValue) {
+        fn_autoimage_lite_hint('method_updated');
+    }
 }

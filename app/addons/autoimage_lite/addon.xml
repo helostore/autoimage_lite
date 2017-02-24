@@ -15,6 +15,29 @@
         <sections>
             <section id="general">
                 <items>
+                    <item id="settings">
+                        <type>header</type>
+                    </item>
+
+                    <item id="preview">
+                        <type>info</type>
+                        <handler>fn_autoimage_lite_preview</handler>
+                    </item>
+                    <item id="method">
+                        <type>selectbox</type>
+                        <default_value>basic</default_value>
+                        <variants>
+                            <item id="default"></item>
+                            <item id="basic"></item>
+                            <item id="balanced"></item>
+                            <item id="entropy"></item>
+                            <item id="hybrid"></item>
+                        </variants>
+                    </item>
+
+                    <item id="license">
+                        <type>header</type>
+                    </item>
                     <item id="email">
                         <type>input</type>
                     </item>

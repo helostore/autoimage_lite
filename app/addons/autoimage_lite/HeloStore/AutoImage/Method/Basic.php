@@ -81,10 +81,10 @@ class Basic
      */
     public function resizeAndCrop($outputPath, $width, $height)
     {
-        // We need relative path
+        // We need relative path for the Storage class
         if ($this->isAbsolutePath($outputPath)) {
             $imagesPath = $this->normalizePathSeparators(Storage::instance('images')->getAbsolutePath(''));
-            $outputRelativeFilePath = str_replace($imagesPath, '', $outputPath);
+            $outputRelativeFilePath = str_replace($imagesPath, '', $this->normalizePathSeparators($outputPath));
             $outputRelativeFilePath = str_replace(DIRECTORY_SEPARATOR, '/', $outputRelativeFilePath);
             $outputRelativeFilePath = trim($outputRelativeFilePath, '/');
 

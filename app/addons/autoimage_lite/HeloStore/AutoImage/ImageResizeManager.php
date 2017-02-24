@@ -27,6 +27,51 @@ use Tygh\Registry;
 class ImageResizeManager extends Singleton
 {
     /**
+     * Get selected method
+     *
+     * @return mixed|null
+     */
+    public function getSelectedMethod()
+    {
+        static $method = null;
+        if ($method == null) {
+            $method = Registry::get('addons.autoimage_lite.method');
+        }
+
+        return $method;
+    }
+
+    /**
+     * Process image using selected method
+     *
+     * @param $inputAbsoluteFilePath
+     * @param $outputAbsoluteFilePath
+     * @param $width
+     * @param $height
+     *
+     * @return bool|string
+     */
+    public function process($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height)
+    {
+        $method = $this->getSelectedMethod();
+        
+        if ($method == 'default') {
+            return '';
+        } else if ($method == 'basic') {
+            return $this->basic($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height);
+        } else if ($method == 'balanced') {
+            return $this->balanced($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height);
+        } else if ($method == 'hybrid') {
+            return $this->hybrid($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height);
+        } else if ($method == 'entropy') {
+            return $this->entropy($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height);
+        }
+
+        return false;
+    }
+
+
+    /**
      * Stub for testing purposes only
      * @param $inputAbsoluteFilePath
      * @param $outputAbsoluteFilePath
@@ -55,6 +100,9 @@ class ImageResizeManager extends Singleton
      */
     public function basic($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height)
     {
+        if (!fn_mkdir(dirname($outputAbsoluteFilePath))) {
+            return false;
+        }
         $method = new Basic($inputAbsoluteFilePath);
         
         return $method->resizeAndCrop($outputAbsoluteFilePath, $width, $height);
@@ -72,6 +120,9 @@ class ImageResizeManager extends Singleton
      */
     public function hybrid($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height)
     {
+        if (!fn_mkdir(dirname($outputAbsoluteFilePath))) {
+            return false;
+        }
 
         $mimeType = mime_content_type($inputAbsoluteFilePath);
         $ext = fn_get_image_extension($mimeType);
@@ -116,6 +167,9 @@ class ImageResizeManager extends Singleton
      */
     public function entropy($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height)
     {
+        if (!fn_mkdir(dirname($outputAbsoluteFilePath))) {
+            return false;
+        }
         $cropper = new CropEntropy($inputAbsoluteFilePath);
         $croppedImage = $cropper->resizeAndCrop($width, $height);
 
@@ -134,6 +188,9 @@ class ImageResizeManager extends Singleton
      */
     public function balanced($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height)
     {
+        if (!fn_mkdir(dirname($outputAbsoluteFilePath))) {
+            return false;
+        }
         $cropper = new CropBalanced($inputAbsoluteFilePath);
         $croppedImage = $cropper->resizeAndCrop($width, $height);
 

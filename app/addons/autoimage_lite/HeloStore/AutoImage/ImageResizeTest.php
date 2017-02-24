@@ -77,7 +77,7 @@ class ImageResizeTest extends Singleton
     public function testStockPhotos($width, $height)
     {
         $addonsPath = $this->normalizePathSeparators(Registry::get('config.dir.addons'));
-        $inputPath = $this->normalizePathSeparators($addonsPath . 'autoimage_lite' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'input');
+        $inputPath = $this->normalizePathSeparators($addonsPath . 'autoimage_lite' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'stock');
 
         $inputFilesPaths = glob($inputPath . '/*');
 

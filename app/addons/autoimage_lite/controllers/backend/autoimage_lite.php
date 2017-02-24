@@ -9,7 +9,7 @@ if ($mode == 'test') {
     $width = Registry::get('settings.Thumbnails.product_lists_thumbnail_width');
     $height = Registry::get('settings.Thumbnails.product_lists_thumbnail_height');
 
-    $referrer = fn_url('addons.manage');
+    $referrer = fn_url('addons.update?addon=autoimage_lite');
     if (!empty($_SERVER['HTTP_REFERER'])) {
         $runtime = Registry::get('runtime');
         $dispatch = $runtime['controller'] . '.' . $runtime['mode'];
