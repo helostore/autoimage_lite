@@ -170,6 +170,11 @@ class ImageResizeManager extends Singleton
         if (!fn_mkdir(dirname($outputAbsoluteFilePath))) {
             return false;
         }
+
+	    if (! extension_loaded( 'imagick' ) ) {
+		    return false;
+	    }
+
         $cropper = new CropEntropy($inputAbsoluteFilePath);
         $croppedImage = $cropper->resizeAndCrop($width, $height);
 
@@ -191,6 +196,11 @@ class ImageResizeManager extends Singleton
         if (!fn_mkdir(dirname($outputAbsoluteFilePath))) {
             return false;
         }
+
+	    if (! extension_loaded( 'imagick' ) ) {
+		    return false;
+	    }
+
         $cropper = new CropBalanced($inputAbsoluteFilePath);
         $croppedImage = $cropper->resizeAndCrop($width, $height);
 
@@ -217,10 +227,16 @@ class ImageResizeManager extends Singleton
             'entropy' => array(
                 'label' =>  'Advanced Entropy',
                 'callable' =>  array($this, 'entropy'),
+                'dependency' => array(
+	                'extensions' => array('imagick')
+                )
             ),
             'balanced' => array(
                 'label' =>  'Advanced Balanced',
                 'callable' =>  array($this, 'balanced'),
+                'dependency' => array(
+	                'extensions' => array('imagick')
+                )
             )
         );
     }

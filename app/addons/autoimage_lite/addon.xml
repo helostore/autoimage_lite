@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <addon scheme="3.0">
     <id>autoimage_lite</id>
-    <version>0.1.11</version>
+    <version>0.1.12</version>
     <priority>120000</priority>
     <position>0</position>
     <status>disabled</status>
@@ -27,11 +27,11 @@
                         <type>selectbox</type>
                         <default_value>basic</default_value>
                         <variants>
-                            <item id="default"></item>
-                            <item id="basic"></item>
-                            <item id="balanced"></item>
-                            <item id="entropy"></item>
-                            <item id="hybrid"></item>
+                            <item id="default"/>
+                            <item id="basic"/>
+                            <item id="balanced"/>
+                            <item id="entropy"/>
+                            <item id="hybrid"/>
                         </variants>
                     </item>
 

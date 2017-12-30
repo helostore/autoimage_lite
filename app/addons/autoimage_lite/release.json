@@ -1,5 +1,16 @@
 [
     {
+        "version": "0.1.12",
+        "releaseDate": "2017-02-24 10:35:18",
+        "releaseTimestamp": "1487932518",
+        "hash": "002d9169fa6fe73e524e35b2b819cbbe3a451c1b",
+        "commits": [
+            "[2017-12-30] Bumped version to 0.1.12",
+            "[2017-02-24]\tAdded preview for each method",
+            "[2017-02-24]\tAdded multiple advanced resizing & cropping methods"
+        ]
+    },
+    {
         "version": "0.1.11",
         "releaseDate": "2016-12-06 03:06:17",
         "releaseTimestamp": "1481036777",
