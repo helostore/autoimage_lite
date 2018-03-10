@@ -14,6 +14,8 @@
 
 use Tygh\Registry;
 use Tygh\Storage;
+use WideImage\TrueColorImage;
+use WideImage\WideImage;
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
@@ -36,9 +38,9 @@ function fn_autoimage_lite_generate_thumbnail_post(&$th_filename, $_lazy)
     if (!empty($tmp_path)) {
 
 
-        require_once AUTOIMAGE_LITE_ADDON_DIR . '/vendor/WideImage/WideImage.php';
+//        require_once AUTOIMAGE_LITE_ADDON_DIR . '/vendor/WideImage/WideImage.php';
         $im = WideImage::load($tmp_path);
-        /** @var WideImage_Image $im */
+        /** @var TrueColorImage $im */
         $im = $im->resize($width, $height, 'outside')->crop('center', 'center', $width, $height);
 
         $convertToFormat = Registry::get('settings.Thumbnails.convert_to');
