@@ -12,6 +12,45 @@ msgctxt "Addons::description::autoimage_lite"
 msgid "Automatically resizes and crops your images, maintaining aspect ratio"
 msgstr "Automatically resizes and crops your images, maintaining aspect ratio"
 
+msgctxt "SettingsOptions::autoimage_lite::settings"
+msgid "Settings"
+msgstr "Settings"
+
+msgctxt "SettingsOptions::autoimage_lite::preview"
+msgid "preview"
+msgstr "Preview"
+
+msgctxt "Languages::autoimage_lite.settings.preview"
+msgid "settings.preview"
+msgstr "<a target='_blank' class='btn' href='[url]'>Click here</a> to preview how each method will display the images."
+
+
+msgctxt "SettingsOptions::autoimage_lite::method"
+msgid "Resize & crop method"
+msgstr "Resize & crop method"
+
+
+msgctxt "SettingsVariants::autoimage_lite::method::default"
+msgid "Default (CS-Cart)"
+msgstr "Default (CS-Cart)"
+
+msgctxt "SettingsVariants::autoimage_lite::method::basic"
+msgid "basic"
+msgstr "Basic (centered)"
+
+msgctxt "SettingsVariants::autoimage_lite::method::entropy"
+msgid "entropy"
+msgstr "Entropy (based on entropy method)"
+
+msgctxt "SettingsVariants::autoimage_lite::method::hybrid"
+msgid "hybrid"
+msgstr "Hybrid (based on entropy and color methods)"
+
+msgctxt "SettingsVariants::autoimage_lite::method::balanced"
+msgid "balanced"
+msgstr "Balanced (based on entropy and interest point methods)"
+
+
 msgctxt "SettingsOptions::autoimage_lite::email"
 msgid "HELOstore email"
 msgstr "HELOstore email"
@@ -39,6 +78,16 @@ msgstr "I'm gonna go now. Buh bye.."
 msgctxt "Languages::auto_image_hint_message_d"
 msgid "<span style=\"font-size: 170%;\"> &#9785; </span> But before that, you should <a href=\"[link]\">click here</a> to regenerate back the default CS-Cart thumbnails."
 msgstr "<span style=\"font-size: 170%;\"> &#9785; </span> But before that, you should <a href=\"[link]\">click here</a> to regenerate back the default CS-Cart thumbnails."
+
+msgctxt "Languages::auto_image_hint_title_method_updated"
+msgid "method_updated"
+msgstr "Regenerate thumbnails"
+
+msgctxt "Languages::auto_image_hint_message_method_updated"
+msgid "method_updated"
+msgstr "Method updated, please <a href=\"[link]\">click here</a> to regenerate back the thumbnails."
+
+
 
 msgctxt "Languages::my_sidekick_is_not_present"
 msgid "This add-on has a single requirement: Sidekick add-on. Please install and activate Sidekick first."
