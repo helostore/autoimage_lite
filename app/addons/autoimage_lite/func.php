@@ -35,12 +35,10 @@ function fn_autoimage_lite_generate_thumbnail_post(&$th_filename, $_lazy)
 
     list($imagePath, $lazy, $thumbRelativeFilePath, $width, $height) = $_lazy;
     $inputAbsoluteFilePath = Storage::instance('images')->getAbsolutePath($imagePath);
-
     $imagesPath = Storage::instance('images')->getAbsolutePath('');
     $outputAbsoluteFilePath = $imagesPath . $thumbRelativeFilePath;
 
     $newThumbPath = ImageResizeManager::instance()->process($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height);
-
     if (!empty($newThumbPath)) {
         $th_filename = $thumbRelativeFilePath;
     }

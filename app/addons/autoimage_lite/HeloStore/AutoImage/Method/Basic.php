@@ -11,8 +11,8 @@ namespace HeloStore\AutoImage\Method;
 
 use Tygh\Registry;
 use Tygh\Storage;
-use WideImage;
-use WideImage_Image;
+use WideImage\TrueColorImage;
+use WideImage\WideImage;
 
 class Basic
 {
@@ -97,7 +97,7 @@ class Basic
         if (!empty($tmp_path)) {
             $im = WideImage::load($tmp_path);
 
-            /** @var WideImage_Image $im */
+            /** @var TrueColorImage $im */
             $im = $im->resize($width, $height, 'outside')->crop('center', 'center', $width, $height);
 
             $convertToFormat = Registry::get('settings.Thumbnails.convert_to');

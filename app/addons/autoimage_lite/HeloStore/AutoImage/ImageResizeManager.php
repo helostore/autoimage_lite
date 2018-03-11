@@ -54,7 +54,6 @@ class ImageResizeManager extends Singleton
     public function process($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height)
     {
         $method = $this->getSelectedMethod();
-        
         if ($method == 'default') {
             return '';
         } else if ($method == 'basic') {
