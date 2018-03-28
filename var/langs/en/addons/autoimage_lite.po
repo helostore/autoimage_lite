@@ -22,7 +22,7 @@ msgstr "Preview"
 
 msgctxt "Languages::autoimage_lite.settings.preview"
 msgid "settings.preview"
-msgstr "<a target='_blank' class='btn' href='[url]'>Click here</a> to preview how each method will display the images."
+msgstr "<a target='_blank' class='btn' href='[url]'>Preview</a> how each method will display the images."
 
 
 msgctxt "SettingsOptions::autoimage_lite::method"

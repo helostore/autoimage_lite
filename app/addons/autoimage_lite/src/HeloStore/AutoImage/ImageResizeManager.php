@@ -26,13 +26,13 @@ use Tygh\Registry;
  */
 class ImageResizeManager extends Singleton
 {
-	private $availableMethods = array();
+	private $methods = array();
 
 	/**
 	 * ImageResizeManager constructor.
 	 */
 	public function __construct() {
-		$this->availableMethods = array(
+		$this->methods = array(
 			'original' => array(
 				'slug'     => 'original',
 				'label'    => 'Original',
@@ -69,7 +69,7 @@ class ImageResizeManager extends Singleton
 	}
 
 	public function getMethod($method) {
-		return $this->availableMethods[ $method ];
+		return $this->methods[ $method ];
 	}
 	/**
 	 * @param $method
@@ -77,33 +77,44 @@ class ImageResizeManager extends Singleton
 	 * @return bool
 	 */
 	public function isValidMethod($method) {
-		return isset( $this->availableMethods[ $method ] );
+		return isset( $this->methods[ $method ] );
 	}
 
+	public function getMethods() {
+		return $this->methods;
+	}
 	/**
 	 * @return array
 	 */
 	public function getAvailableMethods()
 	{
-		return $this->availableMethods;
+		list ( $available, ) = $this->checkDependencies( $this->methods );
+
+		return $available;
 	}
 
 	public function checkDependencies($methods) {
 		$result = array();
-		foreach ( $methods as $method ) {
+		$availableMethods = array();
+		foreach ( $methods as $k => $method ) {
+			$ok = true;
 			if ( ! empty( $method['dependency'] ) ) {
 				if ( ! empty( $method['dependency']['extensions'] ) ) {
 
 					foreach ( $method['dependency']['extensions'] as $extension ) {
 						if ( ! extension_loaded( $extension ) ) {
-							$result[] = $method['label'] . ' is not available: PHP extension ' . $extension . ' is not installed';
+							$result[] = $method['label'] . ' method is not available: PHP extension ' . $extension . ' is not installed';
+							$ok = false;
 						}
 					}
 				}
 			}
+			if ( $ok ) {
+				$availableMethods[$k] = $method;
+			}
 		}
 
-		return $result;
+		return array($availableMethods, $result);
 	}
 
     /**
