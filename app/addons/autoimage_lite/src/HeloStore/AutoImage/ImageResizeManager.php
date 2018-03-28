@@ -26,6 +26,68 @@ use Tygh\Registry;
  */
 class ImageResizeManager extends Singleton
 {
+	private $availableMethods = array();
+
+	/**
+	 * ImageResizeManager constructor.
+	 */
+	public function __construct() {
+		$this->availableMethods = array(
+			'original' => array(
+				'slug'     => 'original',
+				'label'    => 'Original',
+				'callable' => array( $this, 'original' ),
+				'hidden'   => true,
+			),
+			'basic'    => array(
+				'slug'     => 'basic',
+				'label'    => 'Basic',
+				'callable' => array( $this, 'basic' ),
+			),
+			'hybrid'   => array(
+				'slug'     => 'hybrid',
+				'label'    => 'Advanced Hybrid',
+				'callable' => array( $this, 'hybrid' ),
+			),
+			'entropy'  => array(
+				'slug'       => 'entropy',
+				'label'      => 'Advanced Entropy',
+				'callable'   => array( $this, 'entropy' ),
+				'dependency' => array(
+					'extensions' => array( 'imagick' )
+				)
+			),
+			'balanced' => array(
+				'slug'       => 'balanced',
+				'label'      => 'Advanced Balanced',
+				'callable'   => array( $this, 'balanced' ),
+				'dependency' => array(
+					'extensions' => array( 'imagick' )
+				)
+			)
+		);
+	}
+
+	public function getMethod($method) {
+		return $this->availableMethods[ $method ];
+	}
+	/**
+	 * @param $method
+	 *
+	 * @return bool
+	 */
+	public function isValidMethod($method) {
+		return isset( $this->availableMethods[ $method ] );
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getAvailableMethods()
+	{
+		return $this->availableMethods;
+	}
+
     /**
      * Get selected method
      *
@@ -103,7 +165,7 @@ class ImageResizeManager extends Singleton
             return false;
         }
         $method = new Basic($inputAbsoluteFilePath);
-        
+
         return $method->resizeAndCrop($outputAbsoluteFilePath, $width, $height);
     }
 
@@ -207,45 +269,6 @@ class ImageResizeManager extends Singleton
     }
 
 
-    public function getAllMethods()
-    {
-        return array(
-            'original' => array(
-                'label' =>  'Original',
-                'callable' =>  array($this, 'original'),
-                'hidden' =>  true,
-            ),
-            'basic' => array(
-                'label' =>  'Basic',
-                'callable' =>  array($this, 'basic'),
-            ),
-            'hybrid' => array(
-                'label' =>  'Advanced Hybrid',
-                'callable' =>  array($this, 'hybrid'),
-            ),
-            'entropy' => array(
-                'label' =>  'Advanced Entropy',
-                'callable' =>  array($this, 'entropy'),
-                'dependency' => array(
-	                'extensions' => array('imagick')
-                )
-            ),
-            'balanced' => array(
-                'label' =>  'Advanced Balanced',
-                'callable' =>  array($this, 'balanced'),
-                'dependency' => array(
-	                'extensions' => array('imagick')
-                )
-            )
-        );
-    }
-
-    public function getMethods()
-    {
-        $methods = $this->getAllMethods();
-
-        return $methods;
-    }
 
     /**
      * @return array

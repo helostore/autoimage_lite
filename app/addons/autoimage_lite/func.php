@@ -15,8 +15,6 @@
 use HeloStore\AutoImage\ImageResizeManager;
 use Tygh\Registry;
 use Tygh\Storage;
-use WideImage\TrueColorImage;
-use WideImage\WideImage;
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
