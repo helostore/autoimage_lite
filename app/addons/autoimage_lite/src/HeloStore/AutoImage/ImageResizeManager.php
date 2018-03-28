@@ -88,6 +88,24 @@ class ImageResizeManager extends Singleton
 		return $this->availableMethods;
 	}
 
+	public function checkDependencies($methods) {
+		$result = array();
+		foreach ( $methods as $method ) {
+			if ( ! empty( $method['dependency'] ) ) {
+				if ( ! empty( $method['dependency']['extensions'] ) ) {
+
+					foreach ( $method['dependency']['extensions'] as $extension ) {
+						if ( ! extension_loaded( $extension ) ) {
+							$result[] = $method['label'] . ' is not available: PHP extension ' . $extension . ' is not installed';
+						}
+					}
+				}
+			}
+		}
+
+		return $result;
+	}
+
     /**
      * Get selected method
      *

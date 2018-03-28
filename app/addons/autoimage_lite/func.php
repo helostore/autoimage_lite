@@ -101,12 +101,27 @@ function fn_autoimage_lite_preview()
 {
     $url = fn_url('autoimage_lite.test');
 
-    return '<div class="control-group setting-wide autoimage_lite "><label class="control-label "></label>
-        <div class="controls">' . __('autoimage_lite.settings.preview', array('[url]' => $url)) . '</div></div>';
+	$methods = ImageResizeManager::instance()->getAvailableMethods();
+	$result = ImageResizeManager::instance()->checkDependencies( $methods );
+	$list = '';
+	if ( ! empty( $result ) ) {
+		foreach ( $result as $message ) {
+			$list .= '<li style="color: red;">' . $message . '</li>';
+		}
+	}
+
+    return '<div class="control-group setting-wide autoimage_lite "><label class="control-label ">Method</label>
+        <div class="controls">' . __('autoimage_lite.settings.preview', array('[url]' => $url)) . '</div></div>
+        <div class="control-group setting-wide autoimage_lite "><div class="controls">' . $list . '</div></div>
+        ';
 }
+
+
 function fn_settings_actions_addons_autoimage_lite_method($newValue, $oldValue)
 {
     if ($newValue != $oldValue) {
         fn_autoimage_lite_hint('method_updated');
 	}
+
+	return null;
 }
