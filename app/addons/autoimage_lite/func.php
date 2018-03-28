@@ -15,6 +15,8 @@
 use HeloStore\AutoImage\ImageResizeManager;
 use Tygh\Registry;
 use Tygh\Storage;
+use WideImage\TrueColorImage;
+use WideImage\WideImage;
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
@@ -40,7 +42,7 @@ function fn_autoimage_lite_generate_thumbnail_post(&$th_filename, $_lazy)
 
     if (!empty($newThumbPath)) {
         $th_filename = $thumbRelativeFilePath;
-    }
+        }
 }
 
 /**
@@ -108,5 +110,5 @@ function fn_settings_actions_addons_autoimage_lite_method($newValue, $oldValue)
 {
     if ($newValue != $oldValue) {
         fn_autoimage_lite_hint('method_updated');
-    }
+	}
 }

@@ -1,42 +1,40 @@
 [
     {
-        "version": "0.1.12",
-        "releaseDate": "2017-02-24 10:35:18",
-        "releaseTimestamp": "1487932518",
-        "hash": "002d9169fa6fe73e524e35b2b819cbbe3a451c1b",
+        "version": "1.0.4",
+        "releaseDate": "2018-03-28 01:51:27",
+        "releaseTimestamp": "1522245087",
+        "hash": "7c2a7cdfd69fbaceb10575e185247b7e414ebb6b",
         "commits": [
-            "[2017-12-30] Bumped version to 0.1.12",
-            "[2017-02-24]\tAdded preview for each method",
-            "[2017-02-24]\tAdded multiple advanced resizing & cropping methods"
+            "[2018-03-28] Bumped version to 1.0.4"
         ]
     },
     {
-        "version": "0.1.11",
-        "releaseDate": "2016-12-06 03:06:17",
-        "releaseTimestamp": "1481036777",
-        "hash": "bbf041220458bd6d0116f43cd4593110c7b49622",
+        "version": "1.0.3",
+        "releaseDate": "2018-03-10 11:13:32",
+        "releaseTimestamp": "1520680412",
+        "hash": "9f2f2ee99cb8c75e0cff91ddaef1f52a64fb9a39",
         "commits": [
-            "[2016-12-06] Bumped version to 0.1.11",
-            "[2016-12-06] Minor fix: autoloader path corrected",
-            "[2015-11-14] Bumped version to 0.1.10",
-            "[2015-11-14] Set minumum dependency to 4.2.1",
-            "[2015-11-14] Bumped version to 0.1.9",
-            "[2015-11-14] Added gd depedency",
-            "[2015-11-14] Bumped version to 0.1.8",
-            "[2015-11-14] Added gd depedency",
-            "[2015-11-14] Bumped version to 0.1.7",
-            "[2015-11-14] Test",
-            "[2015-11-14] Test",
-            "[2015-11-14] Bumped version to 0.1.6",
-            "[2015-11-14] Update test",
-            "[2015-11-14] Bumped version to 0.1.5",
-            "[2015-11-14] Test",
-            "[2015-11-13] Bumped version to 0.1.4",
-            "[2015-11-13] Minor improvements",
-            "[2015-11-11] Bumped version to 0.1.3",
-            "[2015-11-11] Bumped version to 0.1.2",
-            "[2015-11-11] Improved update com",
-            "[2015-11-06] Bumped version to 0.1.1"
+            "[2018-03-28] Bumped version to 1.0.3"
+        ]
+    },
+    {
+        "version": "1.0.2",
+        "releaseDate": "2018-03-10 11:13:29",
+        "releaseTimestamp": "1520680409",
+        "hash": "9fe5f196d1b98c6606219b265e2046bf070a3abd",
+        "commits": [
+            "[2018-03-10] Bumped version to 1.0.2",
+            "[2018-03-10]\tUpdate icon"
+        ]
+    },
+    {
+        "version": "1.0.1",
+        "releaseDate": "2018-03-10 11:00:15",
+        "releaseTimestamp": "1520679615",
+        "hash": "a7c1a9725bd403bfeed872141e885477dc30862a",
+        "commits": [
+            "[2018-03-10] Bumped version to 1.0.1",
+            "[2018-03-10]\tDependencies update"
         ]
     }
 ]
