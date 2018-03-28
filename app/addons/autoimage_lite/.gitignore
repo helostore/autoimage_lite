@@ -1,3 +1,2 @@
-# /vendor/
-# !vendor/WideImage
+/vendor/
 tests/misc
