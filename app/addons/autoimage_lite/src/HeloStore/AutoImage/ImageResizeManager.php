@@ -133,6 +133,22 @@ class ImageResizeManager extends Singleton
     }
 
     /**
+     * @return bool
+     */
+    public function isOriginalMethod()
+    {
+        return $this->getSelectedMethod() === 'original';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDefaultMethod()
+    {
+        return $this->getSelectedMethod() === 'default';
+    }
+
+    /**
      * Process image using selected method
      *
      * @param $inputAbsoluteFilePath
@@ -145,6 +161,7 @@ class ImageResizeManager extends Singleton
     public function process($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height)
     {
         $method = $this->getSelectedMethod();
+
         if ($method == 'default') {
             return '';
         } else if ($method == 'basic') {

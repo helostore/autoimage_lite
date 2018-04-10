@@ -54,11 +54,9 @@ function fn_settings_actions_addons_autoimage_lite(&$newStatus = null, $oldStatu
 
 function fn_settings_actions_addons_autoimage_lite_method($newValue, $oldValue)
 {
-
 	if ($newValue != $oldValue) {
-//        fn_autoimage_lite_hint('method_updated');
+        fn_autoimage_lite_hint('method_updated');
 	}
-
 }
 
 /**

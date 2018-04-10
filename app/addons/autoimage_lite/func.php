@@ -32,17 +32,21 @@ function fn_autoimage_lite_generate_thumbnail_post(&$th_filename, $_lazy)
     if (!is_array($_lazy) || defined('NO_AUTOIMAGE')) {
         return;
     }
+    $resizeManager = ImageResizeManager::instance();
+    if ($resizeManager->isOriginalMethod()) {
+        return;
+    }
     list($imagePath, $lazy, $thumbRelativeFilePath, $width, $height) = $_lazy;
     $inputAbsoluteFilePath = Storage::instance('images')->getAbsolutePath($imagePath);
 
     $imagesPath = Storage::instance('images')->getAbsolutePath('');
     $outputAbsoluteFilePath = $imagesPath . $thumbRelativeFilePath;
 
-    $newThumbPath = ImageResizeManager::instance()->process($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height);
+    $newThumbPath = $resizeManager->process($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height);
 
     if (!empty($newThumbPath)) {
         $th_filename = $thumbRelativeFilePath;
-        }
+    }
 }
 
 /**
@@ -58,11 +62,12 @@ function fn_autoimage_lite_generate_thumbnail_file_pre(&$image_path, &$lazy, $fi
 		return;
 	}
 
-    $method = ImageResizeManager::instance()->getSelectedMethod();
-    if ($method == 'default') {
+    if (ImageResizeManager::instance()->isOriginalMethod()) {
         return;
     }
+
     // Trick CS-Cart into not going with the default processing; temporarily move args to $lazy variable
+    // @TODO: ditch this dirty hack once CS-Cart introduces a proper hook
     $lazy = func_get_args();
     $image_path = '';
 }
