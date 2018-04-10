@@ -13,3 +13,5 @@
  */
 
 define('AUTOIMAGE_LITE_ADDON_DIR', dirname(__FILE__));
+require_once __DIR__ . '/vendor/autoload.php';
+//define('NO_AUTOIMAGE', true);

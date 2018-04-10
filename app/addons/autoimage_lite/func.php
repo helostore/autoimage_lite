@@ -12,12 +12,13 @@
  * @version    $Id$
  */
 
+use HeloStore\AutoImage\ImageResizeManager;
 use Tygh\Registry;
 use Tygh\Storage;
-use WideImage\TrueColorImage;
-use WideImage\WideImage;
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * @param $th_filename
@@ -27,45 +28,25 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
  */
 function fn_autoimage_lite_generate_thumbnail_post(&$th_filename, $_lazy)
 {
+    // Check if the trick below was applied or not. If not, do nothing.
     if (!is_array($_lazy) || defined('NO_AUTOIMAGE')) {
         return;
     }
-
-    list($image_path, $lazy, $filename, $width, $height) = $_lazy;
-    $absolutePath = Storage::instance('images')->getAbsolutePath($image_path);
-    list(, , $mime_type,$tmp_path) = fn_get_image_size($absolutePath);
-
-    if (!empty($tmp_path)) {
-
-
-//        require_once AUTOIMAGE_LITE_ADDON_DIR . '/vendor/WideImage/WideImage.php';
-        $im = WideImage::load($tmp_path);
-        /** @var TrueColorImage $im */
-        $im = $im->resize($width, $height, 'outside')->crop('center', 'center', $width, $height);
-
-        $convertToFormat = Registry::get('settings.Thumbnails.convert_to');
-        if (Registry::get('settings.Thumbnails.convert_to') != 'original') {
-            $format = $convertToFormat;
-        } else {
-            $format  = fn_get_image_extension($mime_type);
-        }
-        $cont = $im->asString($format);
-
-        // if previous method failed, fallback to CS-Cart's default method
-        if (empty($cont)) {
-            list($cont, $format) = fn_resize_image($tmp_path, $width, $height, Registry::get('settings.Thumbnails.thumbnail_background_color'));{}{}
-        }
-
-
-
-        if (!empty($cont)) {
-            list(, $th_filename) = Storage::instance('images')->put($filename, array(
-                'contents' => $cont,
-                'caching' => true
-            ));
-        }
+    $resizeManager = ImageResizeManager::instance();
+    if ($resizeManager->isOriginalMethod()) {
+        return;
     }
+    list($imagePath, $lazy, $thumbRelativeFilePath, $width, $height) = $_lazy;
+    $inputAbsoluteFilePath = Storage::instance('images')->getAbsolutePath($imagePath);
 
+    $imagesPath = Storage::instance('images')->getAbsolutePath('');
+    $outputAbsoluteFilePath = $imagesPath . $thumbRelativeFilePath;
+
+    $newThumbPath = $resizeManager->process($inputAbsoluteFilePath, $outputAbsoluteFilePath, $width, $height);
+
+    if (!empty($newThumbPath)) {
+        $th_filename = $thumbRelativeFilePath;
+    }
 }
 
 /**
@@ -80,6 +61,13 @@ function fn_autoimage_lite_generate_thumbnail_file_pre(&$image_path, &$lazy, $fi
 	if (defined('NO_AUTOIMAGE')) {
 		return;
 	}
+
+    if (ImageResizeManager::instance()->isOriginalMethod()) {
+        return;
+    }
+
+    // Trick CS-Cart into not going with the default processing; temporarily move args to $lazy variable
+    // @TODO: ditch this dirty hack once CS-Cart introduces a proper hook
     $lazy = func_get_args();
     $image_path = '';
 }
@@ -114,4 +102,29 @@ function fn_autoimage_lite_install()
 	if (class_exists('\HeloStore\ADLS\LicenseClient', true)) {
 		\HeloStore\ADLS\LicenseClient::process(\HeloStore\ADLS\LicenseClient::CONTEXT_INSTALL);
 	}
+}
+
+function fn_autoimage_lite_preview()
+{
+    $url = fn_url('autoimage_lite.test');
+
+	$methods = ImageResizeManager::instance()->getMethods();
+	list(, $result) = ImageResizeManager::instance()->checkDependencies( $methods );
+	$list = '';
+	if ( ! empty( $result ) ) {
+		foreach ( $result as $message ) {
+			$list .= '<li style="color: orange;">' . $message . '</li>';
+		}
+	}
+
+	$status = Registry::get('addons.autoimage_lite.status');
+
+    return '
+        <div class="control-group setting-wide autoimage_lite "><div class="controls">' . $list . '</div></div>' .
+
+		'<div class="control-group setting-wide autoimage_lite "><label class="control-label "></label>
+			<div class="controls">' . ($status == 'A' ?
+		        __('autoimage_lite.settings.preview', array('[url]' => $url))
+		        : '') . '</div></div>'
+	;
 }

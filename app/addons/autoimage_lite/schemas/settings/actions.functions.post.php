@@ -12,6 +12,10 @@
  * @version    $Id$
  */
 
+use HeloStore\AutoImage\ImageResizeManager;
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 
 /**
  * @param null $newStatus
@@ -41,4 +45,28 @@ function fn_settings_actions_addons_autoimage_lite(&$newStatus = null, $oldStatu
     }
 
     return true;
+}
+
+/**
+ * @param $newValue
+ * @param $oldValue
+ */
+
+function fn_settings_actions_addons_autoimage_lite_method($newValue, $oldValue)
+{
+	if ($newValue != $oldValue) {
+        fn_autoimage_lite_hint('method_updated');
+	}
+}
+
+/**
+ * @return array
+ */
+function fn_settings_variants_addons_autoimage_lite_method() {
+	$availableMethods = ImageResizeManager::instance()->getAvailableMethods();
+	$list = array();
+	foreach ( $availableMethods as $method ) {
+		$list[ $method['slug'] ] = $method['label'];
+	}
+	return $list;
 }
