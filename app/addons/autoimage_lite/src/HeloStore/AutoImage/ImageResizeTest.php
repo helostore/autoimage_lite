@@ -77,12 +77,12 @@ class ImageResizeTest extends Singleton
 
 	public function findStockPhotos($page, $itemsPerPage) {
 		$addonsPath = $this->normalizePathSeparators(Registry::get('config.dir.addons'));
-		$inputPath = $this->normalizePathSeparators($addonsPath . 'autoimage_lite' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'stock');
+		$inputPath = $this->normalizePathSeparators($addonsPath . 'autoimage_lite' . DIRECTORY_SEPARATOR . 'image_tests' . DIRECTORY_SEPARATOR . 'stock');
 
 		$inputFilesPaths = glob($inputPath . '/*');
         if (!empty($page) && !empty($itemsPerPage)) {
             $x = ($page - 1) * $itemsPerPage;
-            $y = $page * $itemsPerPage;
+            $y = $itemsPerPage;
             $inputFilesPaths = array_slice($inputFilesPaths, $x, $y);
         }
 
