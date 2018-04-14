@@ -35,9 +35,11 @@ class ImageResizeTest extends Singleton
         return str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $path);
     }
 
-	public function findImages( $limit = 20, $langCode = CART_LANGUAGE ) {
+	public function findImages( $page = 1 , $itemsPerPage = 10, $langCode = CART_LANGUAGE ) {
 		$objectType = 'product';
 		$pairType = 'M';
+
+        $limit = db_paginate($page, $itemsPerPage);
 
 		$items = db_get_array(
 			"SELECT 
@@ -58,7 +60,7 @@ class ImageResizeTest extends Singleton
                 link.object_type = ?s 
                 AND link.type = ?s
             ORDER BY link.position, link.pair_id
-            LIMIT 0,?i
+            ?p
             ",
 			$langCode, $objectType, $pairType, $limit
 		);
@@ -73,11 +75,16 @@ class ImageResizeTest extends Singleton
 		return $inputFilesPaths;
 	}
 
-	public function findStockPhotos() {
+	public function findStockPhotos($page, $itemsPerPage) {
 		$addonsPath = $this->normalizePathSeparators(Registry::get('config.dir.addons'));
 		$inputPath = $this->normalizePathSeparators($addonsPath . 'autoimage_lite' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'stock');
 
 		$inputFilesPaths = glob($inputPath . '/*');
+        if (!empty($page) && !empty($itemsPerPage)) {
+            $x = ($page - 1) * $itemsPerPage;
+            $y = $page * $itemsPerPage;
+            $inputFilesPaths = array_slice($inputFilesPaths, $x, $y);
+        }
 
 		return $inputFilesPaths;
 	}
@@ -144,7 +151,6 @@ class ImageResizeTest extends Singleton
 		$outputFileName = $fileInfo['filename'] . "-" . $method['slug'] . "." . $fileInfo['extension'];
 		$outputAbsoluteFilePath = $outputPath . DIRECTORY_SEPARATOR . $outputFileName;
 		$result = call_user_func($method['callable'], $inputFilePath, $outputAbsoluteFilePath, $width, $height);
-//                aa("$key($outputFileName) = $result");
 		$version = mt_rand(1, 99999);
 
 		return array(

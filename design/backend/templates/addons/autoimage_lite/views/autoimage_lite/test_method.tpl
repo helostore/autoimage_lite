@@ -46,7 +46,7 @@
 {capture name="mainbox"}
     {if !empty($results)}
         <p style="padding: 15px; 15px;">The sizes used in this preview are {$width}x{$height|default:'-'} pixels as defined in the <a target="_blank" href="{"settings.manage?section_id=Thumbnails"|fn_url}">products list thumbnail settings</a>.
-            Verify which method renders the best results for your photos and enabled it in the <a href="{"addons.update?addon=autoimage_lite"}">AutoImage Lite settings</a>.
+            Verify which method renders the best results for your photos and enabled it in the <a href="{"addons.update?addon=autoimage_lite"|fn_url}">AutoImage Lite settings</a>.
         Note: don't forget to scroll if there are many images.
         </p>
         <p style="padding: 0 15px 10px;">

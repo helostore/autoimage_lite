@@ -32,7 +32,8 @@ if ($mode == 'test_method') {
 	$target = !empty($_REQUEST['target']) && in_array($_REQUEST['target'], array('products', 'stock')) ?
 		$_REQUEST['target'] :
 		'stock';
-
+    $page = !empty($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
+    $itemsPerPage = 3;
 	$methodSlug = ! empty( $_REQUEST['method'] ) ? $_REQUEST['method'] : 'basic';
 	if ( ! $imageManipulator->isValidMethod( $methodSlug ) ) {
 		return array( CONTROLLER_STATUS_NO_PAGE );
@@ -40,9 +41,9 @@ if ($mode == 'test_method') {
 	$method = $imageManipulator->getMethod( $methodSlug );
 
 	if ($target == 'stock') {
-		$files = $imageTest->findStockPhotos();
+		$files = $imageTest->findStockPhotos($page, $itemsPerPage);
 	} else if ($target == 'products') {
-		$files = $imageTest->findImages(280);
+        $files = $imageTest->findImages($page, $itemsPerPage);
 	}
 	$results = $imageTest->testMethod( $method, $files, $width, $height );
 	\Tygh\Tygh::$app['view']->assign('results', $results);
@@ -57,13 +58,19 @@ if ($mode == 'test') {
     $target = !empty($_REQUEST['target']) && in_array($_REQUEST['target'], array('products', 'stock')) ?
         $_REQUEST['target'] :
         'stock';
+    $page = !empty($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
+    $itemsPerPage = 3;
 
     if ($target == 'stock') {
-	    $files = $imageTest->findStockPhotos();
+	    $files = $imageTest->findStockPhotos($page, $itemsPerPage);
     } else if ($target == 'products') {
-	    $files = $imageTest->findImages();
+	    $files = $imageTest->findImages($page, $itemsPerPage);
     }
 	$results = $imageTest->testMethods( $files, $width, $height );
+    Tygh::$app['view']->assign('results', $results);
 
-    \Tygh\Tygh::$app['view']->assign('results', $results);
+    if (defined('AJAX_REQUEST')) {
+        Tygh::$app['view']->display('addons/autoimage_lite/views/autoimage_lite/components/test_list.tpl');
+        exit;
+    }
 }
