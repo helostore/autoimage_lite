@@ -1,5 +1,15 @@
 [
     {
+        "version": "1.1.9",
+        "releaseDate": "2018-04-14 11:22:27",
+        "releaseTimestamp": "1523704947",
+        "hash": "95982bf95d450b1fbe34fa47b972f068dc72ce94",
+        "commits": [
+            "[2018-04-14] Bumped version to 1.1.9",
+            "[2018-04-14]\tBugfix in CS-Cart 4.7.3 Multi-Vendor; stock images clean-up."
+        ]
+    },
+    {
         "version": "1.1.8",
         "releaseDate": "2018-04-10 08:39:45",
         "releaseTimestamp": "1523349585",
@@ -25,15 +35,6 @@
         "hash": "e747f88781e8d82be0867cf7e91deaf48b3aaa28",
         "commits": [
             "[2018-04-10] Bumped version to 1.1.6"
-        ]
-    },
-    {
-        "version": "1.1.5",
-        "releaseDate": "2018-03-28 04:28:29",
-        "releaseTimestamp": "1522254509",
-        "hash": "f4aa90edf2c9a8f0d529945991b87676ec3c9e97",
-        "commits": [
-            "[2018-03-28] Bumped version to 1.1.5"
         ]
     }
 ]
