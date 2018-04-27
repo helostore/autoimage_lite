@@ -162,6 +162,16 @@ class ImageResizeManager extends Singleton
     {
         $method = $this->getSelectedMethod();
 
+        // Check image format/extension, and if it's not a supported format, don't process it.
+        list($w, $h, $mime_type, $tmp_path) = fn_get_image_size($inputAbsoluteFilePath);
+        if (empty($mime_type)) {
+            return false;
+        }
+        $format = fn_get_image_extension($mime_type);
+        if (empty($format)) {
+            return false;
+        }
+
         if ($method == 'default') {
             return '';
         } else if ($method == 'basic') {
