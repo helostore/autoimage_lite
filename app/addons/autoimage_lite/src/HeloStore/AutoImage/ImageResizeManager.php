@@ -35,23 +35,23 @@ class ImageResizeManager extends Singleton
 		$this->methods = array(
 			'original' => array(
 				'slug'     => 'original',
-				'label'    => 'Original',
+				'label'    => 'CS-Cart Default',
 				'callable' => array( $this, 'original' ),
 				'hidden'   => true,
 			),
 			'basic'    => array(
 				'slug'     => 'basic',
-				'label'    => 'Basic',
+				'label'    => 'AutoImage Basic (centered)',
 				'callable' => array( $this, 'basic' ),
 			),
 			'hybrid'   => array(
 				'slug'     => 'hybrid',
-				'label'    => 'Advanced Hybrid',
+				'label'    => 'AutoImage Advanced Hybrid (entropy and color)',
 				'callable' => array( $this, 'hybrid' ),
 			),
 			'entropy'  => array(
 				'slug'       => 'entropy',
-				'label'      => 'Advanced Entropy',
+				'label'      => 'AutoImage Advanced Entropy',
 				'callable'   => array( $this, 'entropy' ),
 				'dependency' => array(
 					'extensions' => array( 'imagick' )
@@ -59,7 +59,7 @@ class ImageResizeManager extends Singleton
 			),
 			'balanced' => array(
 				'slug'       => 'balanced',
-				'label'      => 'Advanced Balanced',
+				'label'      => 'AutoImage Advanced Balanced (entropy and interest point)',
 				'callable'   => array( $this, 'balanced' ),
 				'dependency' => array(
 					'extensions' => array( 'imagick' )

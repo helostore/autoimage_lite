@@ -22,8 +22,7 @@ msgstr "Preview"
 
 msgctxt "Languages::autoimage_lite.settings.preview"
 msgid "settings.preview"
-msgstr "<a target='_blank' class='btn' href='[url]'>Preview</a> how each method will display the images."
-
+msgstr "<a target='_blank' class='btn' href='[url]'>Preview</a> <br>Preview how each method would resize, crop and frame your images."
 
 msgctxt "SettingsOptions::autoimage_lite::method"
 msgid "Resize & crop method"
@@ -36,19 +35,19 @@ msgstr "Default (CS-Cart)"
 
 msgctxt "SettingsVariants::autoimage_lite::method::basic"
 msgid "basic"
-msgstr "Basic (centered)"
+msgstr "AutoImage Basic (centered)"
 
 msgctxt "SettingsVariants::autoimage_lite::method::entropy"
 msgid "entropy"
-msgstr "Entropy (based on entropy method)"
+msgstr "AutoImage Advanced Entropy"
 
 msgctxt "SettingsVariants::autoimage_lite::method::hybrid"
 msgid "hybrid"
-msgstr "Hybrid (based on entropy and color methods)"
+msgstr "AutoImage Advanced Hybrid (entropy and color)"
 
 msgctxt "SettingsVariants::autoimage_lite::method::balanced"
 msgid "balanced"
-msgstr "Balanced (based on entropy and interest point methods)"
+msgstr "AutoImage Advanced Balanced (entropy and interest point)"
 
 
 msgctxt "SettingsOptions::autoimage_lite::email"

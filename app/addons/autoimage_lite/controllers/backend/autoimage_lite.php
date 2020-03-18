@@ -6,7 +6,9 @@ use Tygh\Registry;
 
 $width = Registry::get('settings.Thumbnails.product_lists_thumbnail_width');
 $height = Registry::get('settings.Thumbnails.product_lists_thumbnail_height');
-
+if (empty($width)) {
+    $width = 273;
+}
 $referrer = fn_url('addons.update?addon=autoimage_lite');
 if (!empty($_SERVER['HTTP_REFERER'])) {
 	$runtime = Registry::get('runtime');

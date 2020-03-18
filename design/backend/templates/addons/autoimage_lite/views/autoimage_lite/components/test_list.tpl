@@ -3,7 +3,7 @@
         <tr class="hs-ai-result">
             {foreach from=$files key="key" item="result"}
                 <td class="hs-ai-result-file">
-                    {$result.label}<br>
+                    <div style="margin: 4px 0;">{$result.label}</div>
                     {$atts = ''}
                     {if $result.success}
                         {if $key == 'original'}

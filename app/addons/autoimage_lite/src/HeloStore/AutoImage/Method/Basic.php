@@ -11,6 +11,7 @@ namespace HeloStore\AutoImage\Method;
 
 use Tygh\Registry;
 use Tygh\Storage;
+use Tygh\Tools\ImageHelper;
 use WideImage\TrueColorImage;
 use WideImage\WideImage;
 
@@ -79,7 +80,7 @@ class Basic
      *
      * @return bool
      */
-    public function resizeAndCrop($outputPath, $width, $height)
+    public function resizeAndCrop($outputPath, $width = 0, $height = 0)
     {
         // We need relative path for the Storage class
         if ($this->isAbsolutePath($outputPath)) {
@@ -93,7 +94,15 @@ class Basic
         }
         $inputAbsolutePath = $this->getImagePath();
         
-        list(, , $mime_type, $tmp_path) = fn_get_image_size($inputAbsolutePath);
+        list($originalWidth, $originalHeight, $mime_type, $tmp_path) = fn_get_image_size($inputAbsolutePath);
+        if (empty($width) || empty($height)) {
+            if (!empty($width) && empty($height)) {
+                list($width, $height) = ImageHelper::originalProportionsFallback(
+                    $originalWidth, $originalHeight, $width, $height
+                );
+            }
+        }
+
         if (!empty($tmp_path)) {
             $im = WideImage::load($tmp_path);
 
