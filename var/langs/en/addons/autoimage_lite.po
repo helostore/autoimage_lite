@@ -28,6 +28,10 @@ msgctxt "SettingsOptions::autoimage_lite::method"
 msgid "Resize & crop method"
 msgstr "Resize & crop method"
 
+msgctxt "SettingsOptions::autoimage_lite::force_resizing_on_product_details_page"
+msgid "Force image re-cropping on product details page"
+msgstr "Force image re-cropping on product detail page"
+
 
 msgctxt "SettingsVariants::autoimage_lite::method::default"
 msgid "Default (CS-Cart)"

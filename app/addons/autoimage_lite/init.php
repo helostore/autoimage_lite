@@ -17,6 +17,7 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 require_once __DIR__ . '/vendor/autoload.php';
 
 fn_register_hooks(
+    'image_to_display_post',
     'generate_thumbnail_post',
     'generate_thumbnail_file_pre'
 );

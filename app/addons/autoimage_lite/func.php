@@ -20,20 +20,104 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+function fn_autoimage_lite_image_to_display_post(&$image_data, $images, $image_width, $image_height) {
+    if (empty($images)) {
+        return array();
+    }
+    if (empty($image_data)) {
+        return array();
+    }
+
+    static $controller = null;
+    static $mode = null;
+    static $forceResizeOnProductDetailsPage = null;
+    if ($controller === null) {
+        $controller = Registry::get('runtime.controller');
+        $mode = Registry::get('runtime.mode');
+        $forceResizeOnProductDetailsPage = Registry::get('addons.autoimage_lite.force_resizing_on_product_details_page');
+    }
+    $doForceResizeOnProductDetailsPage = false;
+    if ($controller === 'products' && $mode === 'view' && $forceResizeOnProductDetailsPage === true) {
+        $doForceResizeOnProductDetailsPage = true;
+    }
+    if (!$doForceResizeOnProductDetailsPage) {
+        return array();
+    }
+
+    // image pair passed
+    if (!empty($images['icon']) || !empty($images['detailed'])) {
+        if (!empty($images['icon'])) {
+            $absolute_path = $images['icon']['absolute_path'];
+            $relative_path = $images['icon']['relative_path'];
+        } else {
+            $absolute_path = $images['detailed']['absolute_path'];
+            $relative_path = $images['detailed']['relative_path'];
+        }
+
+        $detailed_image_path = !empty($images['detailed']['image_path']) ? $images['detailed']['image_path'] : '';
+        $alt = !empty($images['icon']['alt']) ? $images['icon']['alt'] : $images['detailed']['alt'];
+
+        // single image passed only
+    } else {
+        $alt = $images['alt'];
+        $detailed_image_path = '';
+        $absolute_path = $images['absolute_path'];
+        $relative_path = $images['relative_path'];
+    }
+    $image_width = Registry::get('settings.Thumbnails.product_details_thumbnail_width');
+    $image_height = Registry::get('settings.Thumbnails.product_details_thumbnail_height');
+    $image_path = fn_generate_thumbnail($relative_path, $image_width, $image_height, Registry::get('config.tweaks.lazy_thumbnails'));
+
+    $image_data = array(
+        'image_path' => $image_path,
+        'detailed_image_path' => $detailed_image_path,
+        'alt' => $alt,
+        'width' => $image_width,
+        'height' => $image_height,
+        'absolute_path' => $absolute_path,
+        'generate_image' => strpos($image_path, '&image_path=') !== false // FIXME: dirty checking
+    );
+}
+
+/**
+ * @param $image_path
+ * @param $lazy
+ * @param $filename
+ * @param $width
+ * @param $height
+ */
+function fn_autoimage_lite_generate_thumbnail_file_pre(&$image_path, &$lazy, $filename, $width, $height)
+{
+    if (defined('NO_AUTOIMAGE')) {
+        return;
+    }
+
+    if (ImageResizeManager::instance()->isOriginalMethod()) {
+        return;
+    }
+    // Trick CS-Cart into skipping the default image processing by temporarily moving args into $lazy variable
+    // @TODO: ditch this dirty hack once CS-Cart introduces a proper hook
+    $lazy = func_get_args();
+    $image_path = '';
+}
+
 /**
  * @param $th_filename
  * @param $_lazy
- *
  * @throws \Tygh\Exceptions\DeveloperException
  */
 function fn_autoimage_lite_generate_thumbnail_post(&$th_filename, $_lazy)
 {
-    // Check if the trick below was applied or not. If not, do nothing.
-    if (!is_array($_lazy) || defined('NO_AUTOIMAGE')) {
+    if (defined('NO_AUTOIMAGE')) {
         return;
     }
     $resizeManager = ImageResizeManager::instance();
     if ($resizeManager->isOriginalMethod()) {
+        return;
+    }
+
+    // Check if the trick below was applied or not. If not, do nothing.
+    if (!is_array($_lazy)) {
         return;
     }
     list($imagePath, $lazy, $thumbRelativeFilePath, $width, $height) = $_lazy;
@@ -47,29 +131,6 @@ function fn_autoimage_lite_generate_thumbnail_post(&$th_filename, $_lazy)
     if (!empty($newThumbPath)) {
         $th_filename = $thumbRelativeFilePath;
     }
-}
-
-/**
- * @param $image_path
- * @param $lazy
- * @param $filename
- * @param $width
- * @param $height
- */
-function fn_autoimage_lite_generate_thumbnail_file_pre(&$image_path, &$lazy, $filename, $width, $height)
-{
-	if (defined('NO_AUTOIMAGE')) {
-		return;
-	}
-
-    if (ImageResizeManager::instance()->isOriginalMethod()) {
-        return;
-    }
-
-    // Trick CS-Cart into not going with the default processing; temporarily move args to $lazy variable
-    // @TODO: ditch this dirty hack once CS-Cart introduces a proper hook
-    $lazy = func_get_args();
-    $image_path = '';
 }
 
 /**

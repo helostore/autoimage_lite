@@ -18,6 +18,11 @@
                     <item id="settings">
                         <type>header</type>
                     </item>
+                    <item id="force_resizing_on_product_details_page">
+                        <type>checkbox</type>
+                        <default_value>N</default_value>
+                        <variants/>
+                    </item>
                     <item id="method">
                         <type>selectbox</type>
                         <default_value>basic</default_value>
