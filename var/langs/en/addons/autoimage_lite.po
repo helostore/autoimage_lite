@@ -29,8 +29,8 @@ msgid "Resize & crop method"
 msgstr "Resize & crop method"
 
 msgctxt "SettingsOptions::autoimage_lite::force_resizing_on_product_details_page"
-msgid "Force image re-cropping on product details page"
-msgstr "Force image re-cropping on product detail page"
+msgid "Force image re-cropping on<br> product details page"
+msgstr "Force image re-cropping on<br> product detail page"
 
 msgctxt "SettingsTooltips::autoimage_lite::force_resizing_on_product_details_page"
 msgid "The re-cropping sizes are the values defined in <strong>Settings > Thumbnails > Product details page thumbnail width / height</strong>"
