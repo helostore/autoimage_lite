@@ -34,13 +34,45 @@ function fn_autoimage_lite_image_to_display_post(&$image_data, $images, $image_w
     if ($controller === null) {
         $controller = Registry::get('runtime.controller');
         $mode = Registry::get('runtime.mode');
-        $forceResizeOnProductDetailsPage = Registry::get('addons.autoimage_lite.force_resizing_on_product_details_page');
+        $forceResizeOnProductDetailsPage = Registry::get('addons.autoimage_lite.force_resizing_on_product_details_page') === 'Y';
     }
     $doForceResizeOnProductDetailsPage = false;
     if ($controller === 'products' && $mode === 'view' && $forceResizeOnProductDetailsPage === true) {
         $doForceResizeOnProductDetailsPage = true;
     }
     if (!$doForceResizeOnProductDetailsPage) {
+        return array();
+    }
+
+    static $current_product_images = null;
+    static $current_product_images_ids = null;
+    if ($current_product_images === null) {
+        // The ID of the product being browsed on product details page
+        $main_product_id = $_REQUEST['product_id'];
+        $current_product_images = array();
+        $main_image = fn_get_image_pairs($main_product_id, 'product', 'M', true, true, CART_LANGUAGE);
+        if (!empty($main_image)) {
+            $current_product_images[] = $main_image;
+        }
+        $additional_images = fn_get_image_pairs($main_product_id, 'product', 'A', true, true, CART_LANGUAGE);
+        if (!empty($additional_images)) {
+            foreach ($additional_images as $additional_image) {
+                $current_product_images[] = $additional_image;
+            }
+        }
+        $current_product_images_ids = array();
+        foreach ($current_product_images as $current_product_image) {
+            $current_product_images_ids[] = $current_product_image['detailed_id'];
+        }
+    }
+
+    if (empty($current_product_images_ids)) {
+        return array();
+    }
+    if (empty($images['detailed']) || empty($images['detailed_id'])) {
+        return array();
+    }
+    if (!in_array($images['detailed_id'], $current_product_images_ids)) {
         return array();
     }
 
