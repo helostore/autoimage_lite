@@ -1,5 +1,16 @@
 [
     {
+        "version": "1.3.3",
+        "releaseDate": "2023-08-24 11:38:05",
+        "releaseTimestamp": "1692913085",
+        "hash": "aedbeb9cde0f7552631a59781bd6a41a58a4cc08",
+        "commits": [
+            "[2023-08-24] Bumped version to 1.3.3",
+            "[2023-08-24]\tLock dependencies versions",
+            "[2023-05-17]\tCreate LICENSE"
+        ]
+    },
+    {
         "version": "1.3.2",
         "releaseDate": "2020-05-19 01:49:01",
         "releaseTimestamp": "1589824141",
@@ -27,16 +38,6 @@
         "commits": [
             "[2020-05-19] Bumped version to 1.3.0",
             "[2020-05-19]\tAdd add-on option 'Force image re-cropping on product details page'"
-        ]
-    },
-    {
-        "version": "1.2.0",
-        "releaseDate": "2020-03-18 03:31:47",
-        "releaseTimestamp": "1584545507",
-        "hash": "fd81a09bca6fef589281e744571b843c4004aa75",
-        "commits": [
-            "[2020-03-18] Bumped version to 1.2.0",
-            "[2020-03-18]\tMinor incompatibility fix with CS-Cart 4.9.1"
         ]
     }
 ]
