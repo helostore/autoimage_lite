@@ -1,22 +1,24 @@
 {
-    "name": "helostore/autoimage_lite",
-    "authors": [
-        {
-            "name": "HELOstore",
-            "email": "sales@helostore.com",
-            "homepage": "https://helostore.com",
-            "role": "Developer"
-        }
-    ],
-    "support": {
-        "email": "contact@helostore.com",
-        "irc": "irc://irc.freenode.org/helostore"
-    },
-    "autoload": {
-        "psr-0": { "HeloStore": "src/" }
-    },
-    "require": {
-        "smottt/wideimage": "^1.1",
-        "stojg/crop": "^1.2"
+  "name": "helostore/autoimage_lite",
+  "authors": [
+    {
+      "name": "HELOstore",
+      "email": "sales@helostore.com",
+      "homepage": "https://helostore.com",
+      "role": "Developer"
     }
+  ],
+  "support": {
+    "email": "contact@helostore.com",
+    "irc": "irc://irc.freenode.org/helostore"
+  },
+  "autoload": {
+    "psr-0": {
+      "HeloStore": "src/"
+    }
+  },
+  "require": {
+    "smottt/wideimage": "1.1.4",
+    "stojg/crop": "1.2.11"
+  }
 }

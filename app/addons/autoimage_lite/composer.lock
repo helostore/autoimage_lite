@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "15cd4be56ce076da5017f59e18877a6f",
+    "content-hash": "23cd6214f336cf25c9edd3cd0835a71b",
     "packages": [
         {
             "name": "smottt/wideimage",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smottt/WideImage.git",
-                "reference": "c0548101aa07c0bca8a185d900b1f5844ab6716a"
+                "reference": "755d1b2b474ce9c32092aa6ac0357ebf857545f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smottt/WideImage/zipball/c0548101aa07c0bca8a185d900b1f5844ab6716a",
-                "reference": "c0548101aa07c0bca8a185d900b1f5844ab6716a",
+                "url": "https://api.github.com/repos/smottt/WideImage/zipball/755d1b2b474ce9c32092aa6ac0357ebf857545f5",
+                "reference": "755d1b2b474ce9c32092aa6ac0357ebf857545f5",
                 "shasum": ""
             },
             "require": {
@@ -39,20 +39,24 @@
             ],
             "description": "An open-source PHP library for image manipulation. (With namespaces, PHP 5.3+)",
             "homepage": "http://wideimage.sourceforge.net",
-            "time": "2016-11-13T13:03:08+00:00"
+            "support": {
+                "issues": "https://github.com/smottt/WideImage/issues",
+                "source": "https://github.com/smottt/WideImage/tree/v1.1.4"
+            },
+            "time": "2021-01-09T15:26:41+00:00"
         },
         {
             "name": "stojg/crop",
-            "version": "1.3.0",
+            "version": "1.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stojg/crop.git",
-                "reference": "0ceea67bfe4509799d50467b880e70be699eae42"
+                "reference": "aae5c120096e8d159709c77f7a78ce888d0227af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stojg/crop/zipball/0ceea67bfe4509799d50467b880e70be699eae42",
-                "reference": "0ceea67bfe4509799d50467b880e70be699eae42",
+                "url": "https://api.github.com/repos/stojg/crop/zipball/aae5c120096e8d159709c77f7a78ce888d0227af",
+                "reference": "aae5c120096e8d159709c77f7a78ce888d0227af",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +89,12 @@
             "keywords": [
                 "image"
             ],
-            "time": "2017-04-24T07:16:51+00:00"
+            "support": {
+                "issues": "https://github.com/stojg/crop/issues",
+                "source": "https://github.com/stojg/crop/tree/1.2.11"
+            },
+            "abandoned": true,
+            "time": "2017-03-15T15:25:56+00:00"
         }
     ],
     "packages-dev": [],
@@ -95,5 +104,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }
